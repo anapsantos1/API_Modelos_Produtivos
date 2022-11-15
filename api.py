@@ -20,11 +20,6 @@ app = FastAPI()
 def status():
     return {"status":"on"}
 
-@app.post("/pinguins")
-def create_pinguins(pinguins: Pinguins):
-    pinguins.append(pinguins)
-
-
 @app.get("/experiments")
 def get_experiments():
     url = 'http://127.0.0.1:5000/api/2.0/preview/mlflow/experiments/list'
