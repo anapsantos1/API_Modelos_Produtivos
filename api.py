@@ -6,8 +6,7 @@ import mlflow
 
 # uvicorn api:app --reload
 class Pinguins(BaseModel):
-    species: str
-    island: str
+    island: int
     bill_length_mm: float
     bill_depth_mm: float
     flipper_length_mm: float
@@ -31,7 +30,7 @@ def get_experiments():
 def predict(pinguins: Pinguins):
     mlflow.set_tracking_uri(uri='http://localhost:5000/')
     PATH = 'models:/penguins/Production'
-    classes = ['species', 'island', 'bill_length_mm', 'bill_depth_mm', 'flipper_length_mm', 'body_mass_g', 'sex']
+    classes = ['Adelie', 'Chinstrap', 'Gentoo']
     loaded_model = mlflow.sklearn.load_model(PATH)
 
     dados = [[p[1] for p in pinguins]]
