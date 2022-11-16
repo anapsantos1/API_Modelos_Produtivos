@@ -21,14 +21,15 @@ def status():
 
 @app.get("/experiments")
 def get_experiments():
-    url = 'http://127.0.0.1:5000/api/2.0/preview/mlflow/experiments/list'
+    url = 'http://localhost:5001/api/2.0/preview/mlflow/experiments/list'
     response = requests.request('GET', url=url)
     dados = response.json()
+    print(dados)
     return dados
 
 @app.post("/model")
 def predict(pinguins: Pinguins):
-    mlflow.set_tracking_uri(uri='http://localhost:5000/')
+    mlflow.set_tracking_uri(uri='http://127.0.0.1:5001')
     PATH = 'models:/penguins/Production'
     classes = ['Adelie', 'Chinstrap', 'Gentoo']
     loaded_model = mlflow.sklearn.load_model(PATH)
